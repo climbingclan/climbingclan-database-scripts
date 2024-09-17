@@ -305,6 +305,81 @@ This view consolidates member information from various user metadata fields, pro
 
 This view serves as a central repository of member information, enabling efficient querying and reporting on member data across various aspects of The Climbing Clan's operations.
 
+## 12. wp_member_db_gear
+
+### Purpose
+This view provides a detailed breakdown of the gear that members bring to different types of climbing events. It helps organizers and other members understand what equipment is available for various activities.
+
+### Columns
+- `id`: The unique identifier for the member.
+- `gear_bringing_rope`: Indicates if the member brings a rope ('✅' for yes, 'No' for no).
+- `gear_bringing_rack`: Indicates if the member brings a rack.
+- `gear_bringing_personal_gear`: Indicates if the member brings personal gear.
+- `gear_bringing_quickdraws`: Indicates if the member brings quickdraws.
+- `gear_bringing_guidebook`: Indicates if the member brings a guidebook.
+- `gear_bringing_firstaidkit`: Indicates if the member brings a first aid kit.
+- `gear_bringing_waterproof_jacket`: Indicates if the member brings a waterproof jacket.
+- `gear_bringing_waterproof_trousers`: Indicates if the member brings waterproof trousers.
+- `gear_bringing_boots`: Indicates if the member brings boots.
+- `gear_bringing_ice_axe`: Indicates if the member brings an ice axe.
+- `gear_bringing_crampons`: Indicates if the member brings crampons.
+- `gear_bringing_navigation`: Indicates if the member brings navigation equipment.
+
+### Details
+- This view uses data from the `wp_member_db` table, specifically the `gear-bringing-evening-or-day-trip` and `gear-walking-equipment-weekend` fields.
+- It uses CASE statements to check for specific gear items in these fields and returns '✅' if the item is present, or 'No' if it's not.
+- The view is particularly useful for event planning, ensuring that necessary equipment is available for different types of climbing activities.
+- It can help identify members who consistently bring certain types of gear, which can be useful for pairing members or assigning roles during events.
+
+## 13. wp_member_db_climbing
+
+### Purpose
+This view provides a comprehensive overview of each member's climbing skills, preferences, and experience across various climbing disciplines. It helps in understanding the skill level and capabilities of the club's members.
+
+### Columns
+- `id`: The unique identifier for the member.
+- `skills_belaying_needs_supervision`: Indicates if the member needs supervision while belaying.
+- `skills_belaying_top_rope`: Indicates if the member can belay for top rope climbing.
+- `skills_belaying_lead`: Indicates if the member can belay for lead climbing.
+- `skills_belaying_lead_needs_supervision`: Indicates if the member needs supervision for lead belaying.
+- `skills_belaying_halfropes`: Indicates if the member can belay with half ropes.
+- `skills_trad_moving_together`: Indicates if the member has skills in moving together on traditional routes.
+- `skills_trad_hauling`: Indicates if the member has skills in hauling systems.
+- `skills_trad_big_wall`: Indicates if the member has big wall climbing skills.
+- `skills_trad_multipitch_anchors`: Indicates if the member can set up multipitch anchors.
+- `skills_trad_prussiking`: Indicates if the member has prussiking skills.
+- `skills_trad_belay_escape`: Indicates if the member can perform a belay escape.
+- `skills_trad_retrievable_abseils`: Indicates if the member can set up retrievable abseils.
+- `skills_trad_abseiling`: Indicates if the member has abseiling skills.
+- `skills_trad_toprope`: Indicates if the member can set up top ropes on traditional routes.
+- `skills_trad_seconding`: Indicates if the member can second on traditional routes.
+- `skills_trad_seconding_needs_supervision`: Indicates if the member needs supervision when seconding on traditional routes.
+- `skills_trad_leading_needs_supervision`: Indicates if the member needs supervision when leading on traditional routes.
+- `skills_trad_leading`: Indicates if the member can lead on traditional routes.
+- `skills_sport_stripping`: Indicates if the member can strip sport routes.
+- `skills_sport_seconding_outside`: Indicates if the member can second on outdoor sport routes.
+- `skills_sport_seconding_inside`: Indicates if the member can second on indoor sport routes.
+- `skills_sport_leading_inside`: Indicates if the member can lead on indoor sport routes.
+- `skills_sport_leading_outside`: Indicates if the member can lead on outdoor sport routes.
+- `skills_sport_seconding_needs_supervision`: Indicates if the member needs supervision when seconding on sport routes.
+- `skills_sport_leading_multipitch_anchors`: Indicates if the member can set up multipitch anchors on sport routes.
+- `skills_sport_setting_up_top_rope`: Indicates if the member can set up top ropes on sport routes.
+- `skills_sport_leading_clipstick`: Indicates if the member can use a clipstick for leading.
+- `skills_sport_leading_multipitch_abseiling`: Indicates if the member can abseil on multipitch sport routes.
+
+### Details
+- This view uses data from the `wp_member_db` table, drawing from various fields related to climbing skills.
+- It uses CASE statements to check for specific skills in these fields and returns '✅' if the skill is present, or 'No' if it's not.
+- The view covers a wide range of climbing skills across different disciplines (traditional, sport, indoor, outdoor) and techniques (belaying, leading, seconding, etc.).
+- This comprehensive skill breakdown is invaluable for:
+  1. Pairing members of similar skill levels.
+  2. Identifying members who can mentor others in specific skills.
+  3. Planning events and trips suitable for different skill levels.
+  4. Tracking member progression and identifying areas for training or skill development.
+  5. Ensuring safety by understanding each member's capabilities and limitations.
+
+Both the `wp_member_db_gear` and `wp_member_db_climbing` views play crucial roles in The Climbing Clan's operations. They provide detailed insights into the equipment and skills available within the club, facilitating better event planning, safety management, and member development. These views transform complex, text-based data from the main member database into easily queryable boolean (Yes/No) fields, making it simple to filter and analyze member capabilities and resources.
+
 ## 7. wp_member_db_attendance_score
 
 ### Purpose

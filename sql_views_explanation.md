@@ -305,6 +305,47 @@ This view consolidates member information from various user metadata fields, pro
 
 This view serves as a central repository of member information, enabling efficient querying and reporting on member data across various aspects of The Climbing Clan's operations.
 
+## 7. wp_member_db_attendance_score
+
+### Purpose
+This view calculates and aggregates various attendance and volunteering metrics for each member of The Climbing Clan. It provides a comprehensive overview of a member's participation and reliability in club activities, which is crucial for tracking member engagement, rewarding active participants, and identifying members who might need encouragement or support.
+
+### Columns
+- `user_id`: The unique identifier for each member.
+- `cc_volunteered_for_numerator`: Number of events a member volunteered for and attended.
+- `cc_volunteered_for_but_no_attend`: Number of events a member volunteered for but didn't attend.
+- `cc_volunteered_for_denominator`: Total number of events a member signed up for (excluding duplicates).
+- `attended`: Number of events a member attended.
+- `signups`: Total number of event signups for a member.
+- `cancelled`: Number of cancellations by the member.
+- `noregistershow`: Number of times a member showed up without registering.
+- `noshow`: Number of no-shows by the member.
+- `latebail`: Number of late cancellations by the member.
+- `duplicate`: Number of duplicate signups.
+- `inprogress`: Number of pending event registrations.
+- `attendance_score`: Calculated score based on attendance behavior.
+- `volunteer_score`: Calculated score based on volunteering behavior.
+
+### Details
+- The view joins data from the `wp_member_db` and `wp_order_product_customer_lookup` tables.
+- It uses a series of subqueries to calculate various metrics for each user.
+- The `attendance_score` is calculated using a weighted formula:
+  * +5 points for each attended event
+  * +2 points for showing up without registration
+  * -1 point for cancellations
+  * -3 points for late cancellations
+  * -7 points for no-shows
+- The `volunteer_score` is calculated using the formula:
+  100 * (volunteered_and_attended / total_signups) - 2 * (volunteered_but_no_attend)
+
+This view provides valuable insights into member behavior and engagement, allowing club administrators to:
+1. Identify highly active and reliable members
+2. Spot members who might be struggling with commitment or participation
+3. Calculate rewards or recognition for consistent attendance and volunteering
+4. Analyze overall club engagement and participation trends
+
+The logic in this view emphasizes the importance of both attendance and volunteering, with penalties for unreliable behavior (no-shows, late cancellations) and bonuses for extra engagement (showing up without registration, consistent volunteering). This balanced approach helps maintain a fair and encouraging system for member participation in The Climbing Clan's activities.
+
 ## 5. wp_order_product_customer_lookup
 
 ### Purpose

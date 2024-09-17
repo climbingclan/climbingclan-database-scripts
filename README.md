@@ -2,6 +2,14 @@
 
 This project provides a set of Node.js scripts to manage MySQL views for a WordPress database. It allows you to pull existing views from a remote database, push local view definitions to the database, and manage view deletions.
 
+## Important Documentation
+
+Before proceeding with any operations, please read the following documents:
+
+1. This README.md file for an overview of the system and its usage.
+2. The `sql_views_explanation.md` file for detailed explanations of each SQL view used in the project.
+3. Review the contents of the `views/` folder to understand the current state of your SQL views.
+
 ## Table of Contents
 
 1. [Prerequisites](#prerequisites)
@@ -135,3 +143,9 @@ The project uses a `config.js` file to manage connection details. Here's how to 
      // ...
    });
    ```
+
+## SQL Views
+
+For a detailed explanation of each SQL view used in this project, please refer to the `sql_views_explanation.md` file. This document provides comprehensive information about the purpose, structure, and usage of each view.
+
+Before making any changes to the views, it's crucial to understand their current state and purpose. Review the SQL files in the `views/` folder to see the current definitions of each view.

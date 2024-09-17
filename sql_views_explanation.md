@@ -497,6 +497,102 @@ This view is essential for The Climbing Clan's membership management and event p
 
 Both the `wp_member_db_scores` and `wp_member_db_stats` views work together to provide a comprehensive system for evaluating and understanding member participation and engagement in The Climbing Clan. While the `stats` view provides raw data on participation, the `scores` view translates this data into meaningful metrics that can be used for member recognition, improvement strategies, and overall club management.
 
+## 14. wp_member_db_skills
+
+### Purpose
+This view provides a detailed breakdown of each member's climbing skills across various disciplines, including belaying, traditional (trad) climbing, and sport climbing. It transforms the text-based skill descriptions from the `wp_member_db` table into boolean (Yes/No) flags for easy querying and analysis.
+
+### Columns
+- `id`: The unique identifier for the member.
+- `skills_belaying_needs_supervision`: Indicates if the member needs supervision while belaying.
+- `skills_belaying_top_rope`: Indicates if the member can belay for top rope climbing.
+- `skills_belaying_lead`: Indicates if the member can belay for lead climbing.
+- `skills_belaying_lead_needs_supervision`: Indicates if the member needs supervision for lead belaying.
+- `skills_belaying_halfropes`: Indicates if the member can belay with half ropes.
+- `skills_trad_moving_together`: Indicates if the member has skills in moving together on traditional routes.
+- `skills_trad_hauling`: Indicates if the member has skills in hauling systems.
+- `skills_trad_big_wall`: Indicates if the member has big wall climbing skills.
+- `skills_trad_multipitch_anchors`: Indicates if the member can set up multipitch anchors.
+- `skills_trad_prussiking`: Indicates if the member has prussiking skills.
+- `skills_trad_belay_escape`: Indicates if the member can perform a belay escape.
+- `skills_trad_retrievable_abseils`: Indicates if the member can set up retrievable abseils.
+- `skills_trad_abseiling`: Indicates if the member has abseiling skills.
+- `skills_trad_toprope`: Indicates if the member can set up top ropes on traditional routes.
+- `skills_trad_seconding`: Indicates if the member can second on traditional routes.
+- `skills_trad_seconding_needs_supervision`: Indicates if the member needs supervision when seconding on traditional routes.
+- `skills_trad_leading_needs_supervision`: Indicates if the member needs supervision when leading on traditional routes.
+- `skills_trad_leading`: Indicates if the member can lead on traditional routes.
+- `skills_sport_stripping`: Indicates if the member can strip sport routes.
+- `skills_sport_seconding_outside`: Indicates if the member can second on outdoor sport routes.
+- `skills_sport_seconding_inside`: Indicates if the member can second on indoor sport routes.
+- `skills_sport_leading_inside`: Indicates if the member can lead on indoor sport routes.
+- `skills_sport_leading_outside`: Indicates if the member can lead on outdoor sport routes.
+- `skills_sport_seconding_needs_supervision`: Indicates if the member needs supervision when seconding on sport routes.
+- `skills_sport_leading_multipitch_anchors`: Indicates if the member can set up multipitch anchors on sport routes.
+- `skills_sport_setting_up_top_rope`: Indicates if the member can set up top ropes on sport routes.
+- `skills_sport_leading_clipstick`: Indicates if the member can use a clipstick for leading.
+- `skills_sport_leading_multipitch_abseiling`: Indicates if the member can abseil on multipitch sport routes.
+
+### Details
+- The view uses CASE statements to check for specific skills in the `skills-belaying`, `climbing-trad-skills-extra`, `skills-trad-climbing`, `climbing-sport-skills-extra`, and `skills-sport-climbing` fields of the `wp_member_db` table.
+- It returns '✅' if the skill is present, or 'No' if it's not.
+- The view covers a wide range of climbing skills across different disciplines (traditional, sport, indoor, outdoor) and techniques (belaying, leading, seconding, etc.).
+- This comprehensive skill breakdown is invaluable for pairing members, planning events, ensuring safety, and tracking member progression.
+
+## 15. wp_member_db_skillshare
+
+### Purpose
+This view provides a detailed breakdown of the climbing skills that members are willing and able to share or teach to others. It covers indoor climbing, traditional (trad) climbing, and sport climbing skills.
+
+### Columns
+- `id`: The unique identifier for the member.
+
+Indoor Climbing Skills:
+- `skillshare_climbing_indoors_first_experience`: Can introduce first-time climbers.
+- `skillshare_climbing_indoors_top_rope_belaying`: Can teach top rope belaying.
+- `skillshare_climbing_indoors_lead_belaying`: Can teach lead belaying.
+- `skillshare_climbing_indoors_seconding_leads`: Can teach seconding for lead climbs.
+- `skillshare_climbing_indoors_lead_climbing`: Can teach lead climbing.
+- `skillshare_climbing_indoors_lead_falls`: Can teach how to take lead falls.
+- `skillshare_climbing_indoors_autobelay`: Can teach how to use auto belays.
+- `skillshare_climbing_indoors_bouldering_area`: Can introduce people to indoor bouldering.
+- `skillshare_climbing_indoors_top_rope_trainer_trainer`: Can train others to teach top rope belaying.
+- `skillshare_climbing_indoors_lead_belaying_trainer_trainer`: Can train others to teach lead belaying.
+- `skillshare_climbing_indoors_lead_climbing_trainer_trainer`: Can train others to teach lead climbing.
+
+Traditional Climbing Skills:
+- `skillshare_climbing_trad_seconding`: Can teach seconding on trad routes.
+- `skillshare_climbing_trad_leading_trad`: Can teach leading trad routes.
+- `skillshare_climbing_trad_setting_up_top_rope`: Can teach setting up top ropes on trad routes.
+- `skillshare_climbing_trad_belaying_half_ropes`: Can teach belaying with half ropes.
+- `skillshare_climbing_trad_abseiling`: Can teach abseiling.
+- `skillshare_climbing_trad_retrievable_abseils`: Can teach setting up retrievable abseils.
+- `skillshare_climbing_trad_multipitch_anchors`: Can teach setting up multipitch anchors.
+- `skillshare_climbing_trad_belay_escape`: Can teach belay escape techniques.
+- `skillshare_climbing_trad_prussiking_upwards`: Can teach prussiking upwards.
+- `skillshare_climbing_trad_hauling_systems`: Can teach setting up hauling systems.
+- `skillshare_climbing_trad_moving_together`: Can teach moving together on alpine-style routes.
+- `skillshare_climbing_trad_big_walling`: Can teach big wall climbing techniques.
+
+Sport Climbing Skills:
+- `skillshare_climbing_sport_seconding_outside`: Can teach seconding on outdoor sport routes.
+- `skillshare_climbing_sport_lead_climbing`: Can teach sport lead climbing.
+- `skillshare_climbing_sport_stripping_route`: Can teach how to strip a sport route.
+- `skillshare_climbing_sport_setting_up_top_rope`: Can teach setting up top ropes on sport routes.
+- `skillshare_climbing_sport_multipitch_anchors`: Can teach setting up multipitch anchors on sport routes.
+- `skillshare_climbing_sport_abseiling_multipitch_routes`: Can teach abseiling off multipitch sport routes.
+
+### Details
+- The view uses CASE statements to check for specific skills in the `climbing-indoors-skills-passing-on`, `climbing-trad-skills-passing-on`, and `climbing-sport-skills-passing-on` fields of the `wp_member_db` table.
+- It returns '✅' if the member is willing to share/teach the skill, or 'No' if not.
+- This view is particularly useful for:
+  1. Identifying potential instructors or mentors for specific skills.
+  2. Organizing skill-sharing sessions or workshops.
+  3. Pairing less experienced members with those who can teach them new skills.
+  4. Planning training events based on the available skill-sharing resources within the club.
+
+Both the `wp_member_db_skills` and `wp_member_db_skillshare` views play crucial roles in The Climbing Clan's skill management and development system. While the `skills` view provides a comprehensive overview of each member's current abilities, the `skillshare` view identifies members who can help others develop those skills. Together, these views enable the club to efficiently organize training, ensure safety, and foster a supportive learning environment for all members.
+
 ## 10. wp_order_product_customer_lookup
 
 ### Purpose

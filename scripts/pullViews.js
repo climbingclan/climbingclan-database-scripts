@@ -20,7 +20,7 @@ async function saveViewToFile(viewName, definition) {
   await fs.writeFile(path.join(dir, `${viewName}.sql`), definition);
 }
 
-async function main() {
+async function pullViews() {
   const sshClient = new Client();
   
   sshClient.on('ready', async () => {
@@ -56,4 +56,8 @@ async function main() {
   }).connect(config.ssh);
 }
 
-main().catch(console.error);
+module.exports = { pullViews };
+
+if (require.main === module) {
+  pullViews().catch(console.error);
+}

@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { Client } = require('ssh2');
 const config = require('../config');
+const { pullViews } = require('./pullViews');
 
 async function getViewFiles() {
   const dir = path.join(__dirname, '..', 'views');
@@ -72,6 +73,11 @@ async function main() {
         }
         
         console.log('All views have been processed.');
+        
+        // Execute pullViews after successful push
+        console.log('Executing pull operation to ensure synchronization...');
+        await pullViews();
+        
       } catch (error) {
         console.error('Error:', error);
       } finally {
@@ -82,4 +88,8 @@ async function main() {
   }).connect(config.ssh);
 }
 
-main().catch(console.error);
+if (require.main === module) {
+  main().catch(console.error);
+}
+
+module.exports = { main as pushViews };

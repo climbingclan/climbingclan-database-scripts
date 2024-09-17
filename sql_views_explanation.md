@@ -380,48 +380,7 @@ This view provides a comprehensive overview of each member's climbing skills, pr
 
 Both the `wp_member_db_gear` and `wp_member_db_climbing` views play crucial roles in The Climbing Clan's operations. They provide detailed insights into the equipment and skills available within the club, facilitating better event planning, safety management, and member development. These views transform complex, text-based data from the main member database into easily queryable boolean (Yes/No) fields, making it simple to filter and analyze member capabilities and resources.
 
-## 7. wp_member_db_attendance_score
-
-### Purpose
-This view calculates and aggregates various attendance and volunteering metrics for each member of The Climbing Clan. It provides a comprehensive overview of a member's participation and reliability in club activities, which is crucial for tracking member engagement, rewarding active participants, and identifying members who might need encouragement or support.
-
-### Columns
-- `user_id`: The unique identifier for each member.
-- `cc_volunteered_for_numerator`: Number of events a member volunteered for and attended.
-- `cc_volunteered_for_but_no_attend`: Number of events a member volunteered for but didn't attend.
-- `cc_volunteered_for_denominator`: Total number of events a member signed up for (excluding duplicates).
-- `attended`: Number of events a member attended.
-- `signups`: Total number of event signups for a member.
-- `cancelled`: Number of cancellations by the member.
-- `noregistershow`: Number of times a member showed up without registering.
-- `noshow`: Number of no-shows by the member.
-- `latebail`: Number of late cancellations by the member.
-- `duplicate`: Number of duplicate signups.
-- `inprogress`: Number of pending event registrations.
-- `attendance_score`: Calculated score based on attendance behavior.
-- `volunteer_score`: Calculated score based on volunteering behavior.
-
-### Details
-- The view joins data from the `wp_member_db` and `wp_order_product_customer_lookup` tables.
-- It uses a series of subqueries to calculate various metrics for each user.
-- The `attendance_score` is calculated using a weighted formula:
-  * +5 points for each attended event
-  * +2 points for showing up without registration
-  * -1 point for cancellations
-  * -3 points for late cancellations
-  * -7 points for no-shows
-- The `volunteer_score` is calculated using the formula:
-  100 * (volunteered_and_attended / total_signups) - 2 * (volunteered_but_no_attend)
-
-This view provides valuable insights into member behavior and engagement, allowing club administrators to:
-1. Identify highly active and reliable members
-2. Spot members who might be struggling with commitment or participation
-3. Calculate rewards or recognition for consistent attendance and volunteering
-4. Analyze overall club engagement and participation trends
-
-The logic in this view emphasizes the importance of both attendance and volunteering, with penalties for unreliable behavior (no-shows, late cancellations) and bonuses for extra engagement (showing up without registration, consistent volunteering). This balanced approach helps maintain a fair and encouraging system for member participation in The Climbing Clan's activities.
-
-## 8. wp_member_db_scores
+## 7. wp_member_db_scores
 
 ### Purpose
 This view calculates various performance scores for each member based on their volunteering and attendance records. It provides a quantitative measure of a member's reliability, engagement, and overall contribution to The Climbing Clan's activities.
@@ -451,7 +410,7 @@ This view is crucial for The Climbing Clan's member management system, allowing 
 3. Make data-driven decisions about member roles and responsibilities
 4. Track the overall health and engagement of the club's membership over time
 
-## 9. wp_member_db_stats
+## 8. wp_member_db_stats
 
 ### Purpose
 This view aggregates various statistics about each member's participation in The Climbing Clan's activities. It provides a comprehensive overview of a member's involvement in different types of events and their volunteering history.
@@ -497,7 +456,7 @@ This view is essential for The Climbing Clan's membership management and event p
 
 Both the `wp_member_db_scores` and `wp_member_db_stats` views work together to provide a comprehensive system for evaluating and understanding member participation and engagement in The Climbing Clan. While the `stats` view provides raw data on participation, the `scores` view translates this data into meaningful metrics that can be used for member recognition, improvement strategies, and overall club management.
 
-## 14. wp_member_db_skills
+## 9. wp_member_db_skills
 
 ### Purpose
 This view provides a detailed breakdown of each member's climbing skills across various disciplines, including belaying, traditional (trad) climbing, and sport climbing. It transforms the text-based skill descriptions from the `wp_member_db` table into boolean (Yes/No) flags for easy querying and analysis.
@@ -539,7 +498,7 @@ This view provides a detailed breakdown of each member's climbing skills across 
 - The view covers a wide range of climbing skills across different disciplines (traditional, sport, indoor, outdoor) and techniques (belaying, leading, seconding, etc.).
 - This comprehensive skill breakdown is invaluable for pairing members, planning events, ensuring safety, and tracking member progression.
 
-## 15. wp_member_db_skillshare
+## 10. wp_member_db_skillshare
 
 ### Purpose
 This view provides a detailed breakdown of the climbing skills that members are willing and able to share or teach to others. It covers indoor climbing, traditional (trad) climbing, and sport climbing skills.

@@ -11,8 +11,7 @@ This document provides a detailed explanation of the SQL views used by The Climb
    - wp_order_product_customer_lookup: Combines order, product, and customer information
 
 3. Member "Yes/No" Views - derived from checkbox options in wp_member_db
-   - wp_member_db_climbing: Detailed climbing skills for each member
-   - wp_member_db_skills: Boolean flags for various climbing skills
+   - wp_member_db_skills: Boolean flags for various climbing skills for each member
    - wp_member_db_skillshare: Skills members are willing to teach others
    - wp_member_db_gear: Equipment details for each member
 
@@ -33,7 +32,6 @@ These views work together to provide a comprehensive system for managing members
 
 1. [wp_member_db](#1-wp_member_db)
 2. [wp_order_product_customer_lookup](#2-wp_order_product_customer_lookup)
-3. [wp_member_db_climbing](#3-wp_member_db_climbing)
 4. [wp_member_db_skills](#4-wp_member_db_skills)
 5. [wp_member_db_skillshare](#5-wp_member_db_skillshare)
 6. [wp_member_db_gear](#6-wp_member_db_gear)
@@ -253,53 +251,6 @@ This view combines order, product, and customer information to provide a compreh
 - This view joins data from multiple tables including `wp_wc_order_stats`, `wp_wc_order_product_lookup`, `wp_woocommerce_order_items`, and `wp_postmeta`.
 - It provides a comprehensive overview of each order, including product details, customer information, and event-specific data.
 - The view is particularly useful for analyzing attendance patterns, volunteer participation, and event logistics.
-
-## 3. wp_member_db_climbing
-
-### Purpose
-This view provides a comprehensive overview of each member's climbing skills, preferences, and experience across various climbing disciplines. It helps in understanding the skill level and capabilities of the club's members.
-
-### Columns
-- `id`: The unique identifier for the member.
-- `skills_belaying_needs_supervision`: Indicates if the member needs supervision while belaying.
-- `skills_belaying_top_rope`: Indicates if the member can belay for top rope climbing.
-- `skills_belaying_lead`: Indicates if the member can belay for lead climbing.
-- `skills_belaying_lead_needs_supervision`: Indicates if the member needs supervision for lead belaying.
-- `skills_belaying_halfropes`: Indicates if the member can belay with half ropes.
-- `skills_trad_moving_together`: Indicates if the member has skills in moving together on traditional routes.
-- `skills_trad_hauling`: Indicates if the member has skills in hauling systems.
-- `skills_trad_big_wall`: Indicates if the member has big wall climbing skills.
-- `skills_trad_multipitch_anchors`: Indicates if the member can set up multipitch anchors.
-- `skills_trad_prussiking`: Indicates if the member has prussiking skills.
-- `skills_trad_belay_escape`: Indicates if the member can perform a belay escape.
-- `skills_trad_retrievable_abseils`: Indicates if the member can set up retrievable abseils.
-- `skills_trad_abseiling`: Indicates if the member has abseiling skills.
-- `skills_trad_toprope`: Indicates if the member can set up top ropes on traditional routes.
-- `skills_trad_seconding`: Indicates if the member can second on traditional routes.
-- `skills_trad_seconding_needs_supervision`: Indicates if the member needs supervision when seconding on traditional routes.
-- `skills_trad_leading_needs_supervision`: Indicates if the member needs supervision when leading on traditional routes.
-- `skills_trad_leading`: Indicates if the member can lead on traditional routes.
-- `skills_sport_stripping`: Indicates if the member can strip sport routes.
-- `skills_sport_seconding_outside`: Indicates if the member can second on outdoor sport routes.
-- `skills_sport_seconding_inside`: Indicates if the member can second on indoor sport routes.
-- `skills_sport_leading_inside`: Indicates if the member can lead on indoor sport routes.
-- `skills_sport_leading_outside`: Indicates if the member can lead on outdoor sport routes.
-- `skills_sport_seconding_needs_supervision`: Indicates if the member needs supervision when seconding on sport routes.
-- `skills_sport_leading_multipitch_anchors`: Indicates if the member can set up multipitch anchors on sport routes.
-- `skills_sport_setting_up_top_rope`: Indicates if the member can set up top ropes on sport routes.
-- `skills_sport_leading_clipstick`: Indicates if the member can use a clipstick for leading.
-- `skills_sport_leading_multipitch_abseiling`: Indicates if the member can abseil on multipitch sport routes.
-
-### Details
-- This view uses data from the `wp_member_db` table, drawing from various fields related to climbing skills.
-- It uses CASE statements to check for specific skills in these fields and returns '✅' if the skill is present, or 'No' if it's not.
-- The view covers a wide range of climbing skills across different disciplines (traditional, sport, indoor, outdoor) and techniques (belaying, leading, seconding, etc.).
-- This comprehensive skill breakdown is invaluable for:
-  1. Pairing members of similar skill levels.
-  2. Identifying members who can mentor others in specific skills.
-  3. Planning events and trips suitable for different skill levels.
-  4. Tracking member progression and identifying areas for training or skill development.
-  5. Ensuring safety by understanding each member's capabilities and limitations.
 
 ## 4. wp_member_db_skills
 

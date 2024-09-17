@@ -29,130 +29,21 @@ This document provides a detailed explanation of the SQL views used by The Climb
 
 These views work together to provide a comprehensive system for managing members, events, orders, and climbing locations. They enable efficient querying and analysis of club data, supporting various aspects of The Climbing Clan's operations, from event planning to member skill development and engagement tracking.
 
-## 1. wp_clan_crags
+## Table of Contents
 
-### Purpose
-This view consolidates information about climbing crags, including their details and associated metadata.
+1. [wp_member_db](#1-wp_member_db)
+2. [wp_order_product_customer_lookup](#2-wp_order_product_customer_lookup)
+3. [wp_member_db_climbing](#3-wp_member_db_climbing)
+4. [wp_member_db_skills](#4-wp_member_db_skills)
+5. [wp_member_db_skillshare](#5-wp_member_db_skillshare)
+6. [wp_member_db_gear](#6-wp_member_db_gear)
+7. [wp_member_db_stats](#7-wp_member_db_stats)
+8. [wp_member_db_scores](#8-wp_member_db_scores)
+9. [wp_events_db](#9-wp_events_db)
+10. [wp_vw_events_db](#10-wp_vw_events_db)
+11. [wp_clan_crags](#11-wp_clan_crags)
 
-### Columns
-- `crag_id`: The unique identifier for the crag.
-- `crag_name`: The name of the crag.
-- Various metadata fields related to the crag, such as location description, climbing types, region, guidebooks, photos, parking information, accessibility details, and weather forecast links.
-
-### Details
-- The view selects from the `wp_posts` and `wp_postmeta` tables.
-- It uses a series of MAX() functions with CASE statements to pivot the metadata into columns.
-- This view provides a comprehensive overview of each crag, making it easier to query and display crag information.
-
-## 2. wp_events_db
-
-### Purpose
-This view aggregates information about climbing events, including product details and associated metadata.
-
-### Columns
-- `product_id`: The unique identifier for the event product.
-- `product_name`: The name of the event product.
-- `price`: The price of the event.
-- `cost`: The cost associated with the event.
-- `total_sales`: Total sales for the event.
-- `stock`: Current stock level.
-- `stock_status`: Status of the stock (e.g., in stock, out of stock).
-- `sku`: Stock Keeping Unit for the event.
-- `wooct_time_end`: End time for the event.
-- `woocommerce_waitlist`: Waitlist information.
-- `event_total_places_available`: Total number of places available for the event.
-- `event_signup_opens`: Date and time when sign-up opens.
-- `event_start_date_time`: Start date and time of the event.
-- `event_for_u18s`: Indicates if the event is suitable for under 18s.
-- `event_dogs_come`: Indicates if dogs are allowed at the event.
-
-### Details
-- The view selects from the `wp_posts` and `wp_postmeta` tables.
-- It uses MAX() functions with CASE statements to pivot the metadata into columns.
-- This view is useful for analyzing event data, including pricing, availability, and specific event characteristics.
-
-## 3. wp_vw_events_db
-
-### Purpose
-This view provides an extended version of the events database, including additional metadata and category information.
-
-### Columns
-- All columns from `wp_events_db` (as listed above).
-- `report_details_0_report_author`: Author of the event report.
-- `report_details_0_report_location`: Location mentioned in the event report.
-- `report_details_0_report_content`: Content of the event report.
-- `report_details_0_report_photos`: Photos associated with the event report.
-- `report_details`: Full report details.
-- `short_description`: Brief description of the event.
-- `membership_required`: Indicates if membership is required for participation.
-- `event_how_it_works`: Explanation of how the event works.
-- `event_how_we_get_these`: Information on how these events are organized.
-- `event_when_do_we_meet`: Meeting time information.
-- `event_how_difficult_will_it_be`: Difficulty level of the event.
-- `event_volunteering_how_does_it_work`: Explanation of how volunteering works for the event.
-- `trip_faq_19_trip_faq_title`: Title of FAQ item 19.
-- `trip_faq_19_trip_faq_answer`: Answer to FAQ item 19.
-- `trip_faq_20_trip_faq_title`: Title of FAQ item 20.
-- `trip_faq_20_trip_faq_answer`: Answer to FAQ item 20.
-- `event_how_does_this_work`: General explanation of how the event works.
-- `event_description`: Detailed description of the event.
-- `trip_faq_21_trip_faq_title`: Title of FAQ item 21.
-- `trip_faq_21_trip_faq_answer`: Answer to FAQ item 21.
-- `event_next_week`: Information about the next week's event.
-- `event_location_0_venue_name`: Name of the primary venue.
-- `event_location_0_venue_url`: URL of the primary venue.
-- `event_location_1_venue_name`: Name of the secondary venue (if applicable).
-- `event_location_1_venue_url`: URL of the secondary venue (if applicable).
-- `event_location_old`: Previous location information (if changed).
-- `event_type`: Type of event.
-- `overnight_plans`: Plans for overnight events.
-- `hut_photo`: Photo of the hut (for overnight events).
-- `hut_facilities_description`: Description of hut facilities.
-- `hut_name`: Name of the hut.
-- `hut_google_maps_location`: Google Maps location of the hut.
-- `trip_faq_11_trip_faq_title`: Title of FAQ item 11.
-- `trip_faq_11_trip_faq_answer`: Answer to FAQ item 11.
-- `trip_faq_12_trip_faq_title`: Title of FAQ item 12.
-- `trip_faq_12_trip_faq_answer`: Answer to FAQ item 12.
-- `event_paying_for`: What the event fee covers.
-- `event_start_time`: Start time of the event.
-- `session_start_time`: Start time of the session.
-- `session_end_time`: End time of the session.
-- `who_running_event`: Information about who is running the event.
-- `session_will_cover`: What the session will cover.
-- `event_start_date`: Start date of the event.
-- `event_finish_date`: Finish date of the event.
-- `event_possible_location`: Possible location for the event.
-- `event_location`: Confirmed location of the event.
-- `primary_category`: The primary category of the event.
-
-### Details
-- The view builds upon the `wp_events_db` view, joining with `wp_term_relationships`, `wp_term_taxonomy`, and `wp_terms` tables.
-- It includes more detailed event information and categorization.
-- This view is particularly useful for comprehensive event reporting and analysis.
-
-## 4. wp_vw_order_details
-
-### Purpose
-This view combines order information with customer details for a comprehensive overview of each order.
-
-### Columns
-- `order_id`: The unique identifier for the order.
-- `first_name`: The customer's first name.
-- `last_name`: The customer's last name.
-- `order_item_name`: The name of the ordered item.
-- `order_created`: The date and time when the order was created.
-
-### Details
-- The view joins the `wp_order_product_customer_lookup` table with the `wp_member_db` view.
-- It provides a quick way to access essential order information along with customer details.
-- This view is useful for order management and customer service purposes.
-
-These views provide The Climbing Clan with efficient ways to access and analyze data related to crags, events, orders, and customer information. They facilitate better management of the climbing locations, event planning, and order processing, enabling more detailed reporting and analysis across various aspects of the organization's operations.
-
-By combining information from different tables and presenting it in a structured format, these views simplify complex queries and improve the overall performance of data retrieval operations for The Climbing Clan's platform.
-
-## 6. wp_member_db
+## 1. wp_member_db
 
 ### Purpose
 This view consolidates member information from various user metadata fields, providing a comprehensive overview of each member's profile, preferences, and administrative details.
@@ -330,33 +221,40 @@ This view consolidates member information from various user metadata fields, pro
 
 This view serves as a central repository of member information, enabling efficient querying and reporting on member data across various aspects of The Climbing Clan's operations.
 
-## 12. wp_member_db_gear
+## 2. wp_order_product_customer_lookup
 
 ### Purpose
-This view provides a detailed breakdown of the gear that members bring to different types of climbing events. It helps organizers and other members understand what equipment is available for various activities.
+This view combines order, product, and customer information to provide a comprehensive overview of each order, including attendance and volunteering details.
 
 ### Columns
-- `id`: The unique identifier for the member.
-- `gear_bringing_rope`: Indicates if the member brings a rope ('✅' for yes, 'No' for no).
-- `gear_bringing_rack`: Indicates if the member brings a rack.
-- `gear_bringing_personal_gear`: Indicates if the member brings personal gear.
-- `gear_bringing_quickdraws`: Indicates if the member brings quickdraws.
-- `gear_bringing_guidebook`: Indicates if the member brings a guidebook.
-- `gear_bringing_firstaidkit`: Indicates if the member brings a first aid kit.
-- `gear_bringing_waterproof_jacket`: Indicates if the member brings a waterproof jacket.
-- `gear_bringing_waterproof_trousers`: Indicates if the member brings waterproof trousers.
-- `gear_bringing_boots`: Indicates if the member brings boots.
-- `gear_bringing_ice_axe`: Indicates if the member brings an ice axe.
-- `gear_bringing_crampons`: Indicates if the member brings crampons.
-- `gear_bringing_navigation`: Indicates if the member brings navigation equipment.
+- `order_id`: The unique identifier for the order.
+- `product_id`: The ID of the product ordered.
+- `variation_id`: The ID of the product variation, if applicable.
+- `order_item_name`: The name of the ordered item.
+- `status`: The current status of the order.
+- `cc_attendance`: The attendance status for the event.
+- `cc_volunteer_attendance`: The attendance status for volunteers.
+- `cc_volunteer`: The volunteering role or status.
+- `cc_outdoor_location`: The outdoor location for the event, if applicable.
+- `cc_location`: The general location of the event.
+- `cc_indoor_location`: The indoor location for the event, if applicable.
+- `memberbot_order_category`: The category of the order as determined by the memberbot.
+- `customer_id`: The unique identifier for the customer.
+- `user_id`: The user ID associated with the order.
+- `order_created`: The date and time when the order was created.
+- `cc_attendance_sim`: Simulated attendance status (for testing or forecasting).
+- `cc_volunteer_attendance_sim`: Simulated volunteer attendance status.
+- `cc_volunteer_sim`: Simulated volunteering role or status.
+- `cc_outdoor_location_sim`: Simulated outdoor location.
+- `first_name`: The first name of the customer (placeholder in this view).
+- `last_name`: The last name of the customer (placeholder in this view).
 
 ### Details
-- This view uses data from the `wp_member_db` table, specifically the `gear-bringing-evening-or-day-trip` and `gear-walking-equipment-weekend` fields.
-- It uses CASE statements to check for specific gear items in these fields and returns '✅' if the item is present, or 'No' if it's not.
-- The view is particularly useful for event planning, ensuring that necessary equipment is available for different types of climbing activities.
-- It can help identify members who consistently bring certain types of gear, which can be useful for pairing members or assigning roles during events.
+- This view joins data from multiple tables including `wp_wc_order_stats`, `wp_wc_order_product_lookup`, `wp_woocommerce_order_items`, and `wp_postmeta`.
+- It provides a comprehensive overview of each order, including product details, customer information, and event-specific data.
+- The view is particularly useful for analyzing attendance patterns, volunteer participation, and event logistics.
 
-## 13. wp_member_db_climbing
+## 3. wp_member_db_climbing
 
 ### Purpose
 This view provides a comprehensive overview of each member's climbing skills, preferences, and experience across various climbing disciplines. It helps in understanding the skill level and capabilities of the club's members.
@@ -403,85 +301,7 @@ This view provides a comprehensive overview of each member's climbing skills, pr
   4. Tracking member progression and identifying areas for training or skill development.
   5. Ensuring safety by understanding each member's capabilities and limitations.
 
-Both the `wp_member_db_gear` and `wp_member_db_climbing` views play crucial roles in The Climbing Clan's operations. They provide detailed insights into the equipment and skills available within the club, facilitating better event planning, safety management, and member development. These views transform complex, text-based data from the main member database into easily queryable boolean (Yes/No) fields, making it simple to filter and analyze member capabilities and resources.
-
-## 7. wp_member_db_scores
-
-### Purpose
-This view calculates various performance scores for each member based on their volunteering and attendance records. It provides a quantitative measure of a member's reliability, engagement, and overall contribution to The Climbing Clan's activities.
-
-### Columns
-- `user_id`: The unique identifier for each member.
-- `volunteer_reliability_score`: A percentage score indicating how reliable a member is in fulfilling their volunteering commitments.
-- `attendance_reliability_score`: A percentage score indicating how reliable a member is in attending events they've signed up for.
-- `volunteer_receptiveness`: A percentage score indicating how often a member volunteers when opportunities are available.
-- `volunteer_score`: Same as `volunteer_receptiveness`, possibly redundant.
-- `volunteer_value`: A weighted score that takes into account the number of times a member has volunteered and their reliability in doing so.
-- `volunteer_score_old`: An older version of the volunteer score calculation, kept for reference or comparison.
-- `attendance_score`: A comprehensive score that rewards attendance and penalizes various forms of non-attendance.
-
-### Details
-- The view uses data from the `wp_member_db` table, which likely contains aggregated statistics about each member's activities.
-- Scores are calculated using various formulas that weight different aspects of a member's participation:
-  * `volunteer_reliability_score` = (successful volunteering / total volunteering opportunities) * 100
-  * `attendance_reliability_score` = (attended events / (attended + late cancellations + no-shows)) * 100
-  * `volunteer_receptiveness` = (successful volunteering / total volunteer signups) * 100
-  * `volunteer_value` = A complex calculation that rewards consistent volunteering and penalizes missed volunteer opportunities
-  * `attendance_score` = 100 + bonuses for attendance - penalties for various types of non-attendance
-
-This view is crucial for The Climbing Clan's member management system, allowing administrators to:
-1. Identify and reward highly engaged and reliable members
-2. Spot members who might need encouragement or support to improve their participation
-3. Make data-driven decisions about member roles and responsibilities
-4. Track the overall health and engagement of the club's membership over time
-
-## 8. wp_member_db_stats
-
-### Purpose
-This view aggregates various statistics about each member's participation in The Climbing Clan's activities. It provides a comprehensive overview of a member's involvement in different types of events and their volunteering history.
-
-### Columns
-- `user_id`: The unique identifier for each member.
-- `volunteer_for_numerator`: Count of events where the member successfully volunteered and attended.
-- `volunteer_for_but_no_attend`: Count of events where the member volunteered but didn't attend.
-- `volunteer_for_but_no_volunteer`: Count of events where the member was supposed to volunteer but didn't.
-- `volunteer_for_and_cancel_but_did_volunteer`: Count of events where the member cancelled attendance but still volunteered.
-- `volunteer_for_denominator`: Total count of events the member signed up to volunteer for.
-- `attendance_attended`: Total count of events the member attended.
-- `attendance_outdoor_thursday_attended`: Count of outdoor Thursday events attended.
-- `attendance_outdoor_saturday_attended`: Count of outdoor Saturday events attended.
-- `attendance_outdoor_day_attended`: Count of outdoor day events attended.
-- `attendance_indoor_wednesday_attended`: Count of indoor Wednesday events attended.
-- `attendance_overnight_attended`: Count of overnight events attended.
-- `attendance_training_attended`: Count of training events attended.
-- Various specific training event attendance counts (e.g., indoor lead training, top rope training, etc.)
-- `attendance_first_aid_attended`: Count of first aid training events attended.
-- `attendance_social_attended`: Count of social events attended.
-- `attendance_signups`: Total count of event signups.
-- `attendance_cancelled`: Count of cancelled event attendances.
-- `attendance_noregistershow`: Count of events attended without registration.
-- `attendance_noshow`: Count of no-shows.
-- `attendance_weather_cancel`: Count of weather-related cancellations.
-- `attendance_clan_cancel`: Count of events cancelled by the clan.
-- `attendance_latebail`: Count of late cancellations.
-- `attendance_duplicate`: Count of duplicate signups.
-- `attendance_inprogress`: Count of in-progress event registrations.
-
-### Details
-- The view joins data from the `wp_member_db` and `wp_order_product_customer_lookup` tables.
-- It uses a series of COUNT and CASE statements to aggregate different types of event participation and volunteering activities.
-- The statistics are grouped by user_id, providing a comprehensive summary for each member.
-
-This view is essential for The Climbing Clan's membership management and event planning:
-1. It allows administrators to track individual member participation across various event types.
-2. Helps identify members who are particularly active in specific areas (e.g., outdoor events, training sessions).
-3. Provides insights into volunteering patterns and reliability.
-4. Assists in identifying potential issues (e.g., frequent no-shows or late cancellations).
-5. Supports data-driven decision making for event planning and member engagement strategies.
-
-Both the `wp_member_db_scores` and `wp_member_db_stats` views work together to provide a comprehensive system for evaluating and understanding member participation and engagement in The Climbing Clan. While the `stats` view provides raw data on participation, the `scores` view translates this data into meaningful metrics that can be used for member recognition, improvement strategies, and overall club management.
-
-## 9. wp_member_db_skills
+## 4. wp_member_db_skills
 
 ### Purpose
 This view provides a detailed breakdown of each member's climbing skills across various disciplines, including belaying, traditional (trad) climbing, and sport climbing. It transforms the text-based skill descriptions from the `wp_member_db` table into boolean (Yes/No) flags for easy querying and analysis.
@@ -523,7 +343,7 @@ This view provides a detailed breakdown of each member's climbing skills across 
 - The view covers a wide range of climbing skills across different disciplines (traditional, sport, indoor, outdoor) and techniques (belaying, leading, seconding, etc.).
 - This comprehensive skill breakdown is invaluable for pairing members, planning events, ensuring safety, and tracking member progression.
 
-## 10. wp_member_db_skillshare
+## 5. wp_member_db_skillshare
 
 ### Purpose
 This view provides a detailed breakdown of the climbing skills that members are willing and able to share or teach to others. It covers indoor climbing, traditional (trad) climbing, and sport climbing skills.
@@ -575,37 +395,204 @@ Sport Climbing Skills:
   3. Pairing less experienced members with those who can teach them new skills.
   4. Planning training events based on the available skill-sharing resources within the club.
 
-Both the `wp_member_db_skills` and `wp_member_db_skillshare` views play crucial roles in The Climbing Clan's skill management and development system. While the `skills` view provides a comprehensive overview of each member's current abilities, the `skillshare` view identifies members who can help others develop those skills. Together, these views enable the club to efficiently organize training, ensure safety, and foster a supportive learning environment for all members.
-
-## 10. wp_order_product_customer_lookup
+## 6. wp_member_db_gear
 
 ### Purpose
-This view combines order, product, and customer information to provide a comprehensive overview of each order, including attendance and volunteering details.
+This view provides a detailed breakdown of the gear that members bring to different types of climbing events. It helps organizers and other members understand what equipment is available for various activities.
 
 ### Columns
-- `order_id`: The unique identifier for the order.
-- `product_id`: The ID of the product ordered.
-- `variation_id`: The ID of the product variation, if applicable.
-- `order_item_name`: The name of the ordered item.
-- `status`: The current status of the order.
-- `cc_attendance`: The attendance status for the event.
-- `cc_volunteer_attendance`: The attendance status for volunteers.
-- `cc_volunteer`: The volunteering role or status.
-- `cc_outdoor_location`: The outdoor location for the event, if applicable.
-- `cc_location`: The general location of the event.
-- `cc_indoor_location`: The indoor location for the event, if applicable.
-- `memberbot_order_category`: The category of the order as determined by the memberbot.
-- `customer_id`: The unique identifier for the customer.
-- `user_id`: The user ID associated with the order.
-- `order_created`: The date and time when the order was created.
-- `cc_attendance_sim`: Simulated attendance status (for testing or forecasting).
-- `cc_volunteer_attendance_sim`: Simulated volunteer attendance status.
-- `cc_volunteer_sim`: Simulated volunteering role or status.
-- `cc_outdoor_location_sim`: Simulated outdoor location.
-- `first_name`: The first name of the customer (placeholder in this view).
-- `last_name`: The last name of the customer (placeholder in this view).
+- `id`: The unique identifier for the member.
+- `gear_bringing_rope`: Indicates if the member brings a rope ('✅' for yes, 'No' for no).
+- `gear_bringing_rack`: Indicates if the member brings a rack.
+- `gear_bringing_personal_gear`: Indicates if the member brings personal gear.
+- `gear_bringing_quickdraws`: Indicates if the member brings quickdraws.
+- `gear_bringing_guidebook`: Indicates if the member brings a guidebook.
+- `gear_bringing_firstaidkit`: Indicates if the member brings a first aid kit.
+- `gear_bringing_waterproof_jacket`: Indicates if the member brings a waterproof jacket.
+- `gear_bringing_waterproof_trousers`: Indicates if the member brings waterproof trousers.
+- `gear_bringing_boots`: Indicates if the member brings boots.
+- `gear_bringing_ice_axe`: Indicates if the member brings an ice axe.
+- `gear_bringing_crampons`: Indicates if the member brings crampons.
+- `gear_bringing_navigation`: Indicates if the member brings navigation equipment.
 
 ### Details
-- This view joins data from multiple tables including `wp_wc_order_stats`, `wp_wc_order_product_lookup`, `wp_woocommerce_order_items`, and `wp_postmeta`.
-- It provides a comprehensive overview of each order, including product details, customer information, and event-specific data.
-- The view is particularly useful for analyzing attendance patterns, volunteer participation, and event logistics.
+- This view uses data from the `wp_member_db` table, specifically the `gear-bringing-evening-or-day-trip` and `gear-walking-equipment-weekend` fields.
+- It uses CASE statements to check for specific gear items in these fields and returns '✅' if the item is present, or 'No' if it's not.
+- The view is particularly useful for event planning, ensuring that necessary equipment is available for different types of climbing activities.
+- It can help identify members who consistently bring certain types of gear, which can be useful for pairing members or assigning roles during events.
+
+## 7. wp_member_db_stats
+
+### Purpose
+This view aggregates various statistics about each member's participation in The Climbing Clan's activities. It provides a comprehensive overview of a member's involvement in different types of events and their volunteering history.
+
+### Columns
+- `user_id`: The unique identifier for each member.
+- `volunteer_for_numerator`: Count of events where the member successfully volunteered and attended.
+- `volunteer_for_but_no_attend`: Count of events where the member volunteered but didn't attend.
+- `volunteer_for_but_no_volunteer`: Count of events where the member was supposed to volunteer but didn't.
+- `volunteer_for_and_cancel_but_did_volunteer`: Count of events where the member cancelled attendance but still volunteered.
+- `volunteer_for_denominator`: Total count of events the member signed up to volunteer for.
+- `attendance_attended`: Total count of events the member attended.
+- `attendance_outdoor_thursday_attended`: Count of outdoor Thursday events attended.
+- `attendance_outdoor_saturday_attended`: Count of outdoor Saturday events attended.
+- `attendance_outdoor_day_attended`: Count of outdoor day events attended.
+- `attendance_indoor_wednesday_attended`: Count of indoor Wednesday events attended.
+- `attendance_overnight_attended`: Count of overnight events attended.
+- `attendance_training_attended`: Count of training events attended.
+- Various specific training event attendance counts (e.g., indoor lead training, top rope training, etc.)
+- `attendance_first_aid_attended`: Count of first aid training events attended.
+- `attendance_social_attended`: Count of social events attended.
+- `attendance_signups`: Total count of event signups.
+- `attendance_cancelled`: Count of cancelled event attendances.
+- `attendance_noregistershow`: Count of events attended without registration.
+- `attendance_noshow`: Count of no-shows.
+- `attendance_weather_cancel`: Count of weather-related cancellations.
+- `attendance_clan_cancel`: Count of events cancelled by the clan.
+- `attendance_latebail`: Count of late cancellations.
+- `attendance_duplicate`: Count of duplicate signups.
+- `attendance_inprogress`: Count of in-progress event registrations.
+
+### Details
+- The view joins data from the `wp_member_db` and `wp_order_product_customer_lookup` tables.
+- It uses a series of COUNT and CASE statements to aggregate different types of event participation and volunteering activities.
+- The statistics are grouped by user_id, providing a comprehensive summary for each member.
+
+This view is essential for The Climbing Clan's membership management and event planning:
+1. It allows administrators to track individual member participation across various event types.
+2. Helps identify members who are particularly active in specific areas (e.g., outdoor events, training sessions).
+3. Provides insights into volunteering patterns and reliability.
+4. Assists in identifying potential issues (e.g., frequent no-shows or late cancellations).
+5. Supports data-driven decision making for event planning and member engagement strategies.
+
+## 8. wp_member_db_scores
+
+### Purpose
+This view calculates various performance scores for each member based on their volunteering and attendance records. It provides a quantitative measure of a member's reliability, engagement, and overall contribution to The Climbing Clan's activities.
+
+### Columns
+- `user_id`: The unique identifier for each member.
+- `volunteer_reliability_score`: A percentage score indicating how reliable a member is in fulfilling their volunteering commitments.
+- `attendance_reliability_score`: A percentage score indicating how reliable a member is in attending events they've signed up for.
+- `volunteer_receptiveness`: A percentage score indicating how often a member volunteers when opportunities are available.
+- `volunteer_score`: Same as `volunteer_receptiveness`, possibly redundant.
+- `volunteer_value`: A weighted score that takes into account the number of times a member has volunteered and their reliability in doing so.
+- `volunteer_score_old`: An older version of the volunteer score calculation, kept for reference or comparison.
+- `attendance_score`: A comprehensive score that rewards attendance and penalizes various forms of non-attendance.
+
+### Details
+- The view uses data from the `wp_member_db` table, which likely contains aggregated statistics about each member's activities.
+- Scores are calculated using various formulas that weight different aspects of a member's participation:
+  * `volunteer_reliability_score` = (successful volunteering / total volunteering opportunities) * 100
+  * `attendance_reliability_score` = (attended events / (attended + late cancellations + no-shows)) * 100
+  * `volunteer_receptiveness` = (successful volunteering / total volunteer signups) * 100
+  * `volunteer_value` = A complex calculation that rewards consistent volunteering and penalizes missed volunteer opportunities
+  * `attendance_score` = 100 + bonuses for attendance - penalties for various types of non-attendance
+
+This view is crucial for The Climbing Clan's member management system, allowing administrators to:
+1. Identify and reward highly engaged and reliable members
+2. Spot members who might need encouragement or support to improve their participation
+3. Make data-driven decisions about member roles and responsibilities
+4. Track the overall health and engagement of the club's membership over time
+
+## 9. wp_events_db
+
+### Purpose
+This view aggregates information about climbing events, including product details and associated metadata.
+
+### Columns
+- `product_id`: The unique identifier for the event product.
+- `product_name`: The name of the event product.
+- `price`: The price of the event.
+- `cost`: The cost associated with the event.
+- `total_sales`: Total sales for the event.
+- `stock`: Current stock level.
+- `stock_status`: Status of the stock (e.g., in stock, out of stock).
+- `sku`: Stock Keeping Unit for the event.
+- `wooct_time_end`: End time for the event.
+- `woocommerce_waitlist`: Waitlist information.
+- `event_total_places_available`: Total number of places available for the event.
+- `event_signup_opens`: Date and time when sign-up opens.
+- `event_start_date_time`: Start date and time of the event.
+- `event_for_u18s`: Indicates if the event is suitable for under 18s.
+- `event_dogs_come`: Indicates if dogs are allowed at the event.
+
+### Details
+- The view selects from the `wp_posts` and `wp_postmeta` tables.
+- It uses MAX() functions with CASE statements to pivot the metadata into columns.
+- This view is useful for analyzing event data, including pricing, availability, and specific event characteristics.
+
+## 10. wp_vw_events_db
+
+### Purpose
+This view provides an extended version of the events database, including additional metadata and category information.
+
+### Columns
+- All columns from `wp_events_db` (as listed above).
+- `report_details_0_report_author`: Author of the event report.
+- `report_details_0_report_location`: Location mentioned in the event report.
+- `report_details_0_report_content`: Content of the event report.
+- `report_details_0_report_photos`: Photos associated with the event report.
+- `report_details`: Full report details.
+- `short_description`: Brief description of the event.
+- `membership_required`: Indicates if membership is required for participation.
+- `event_how_it_works`: Explanation of how the event works.
+- `event_how_we_get_these`: Information on how these events are organized.
+- `event_when_do_we_meet`: Meeting time information.
+- `event_how_difficult_will_it_be`: Difficulty level of the event.
+- `event_volunteering_how_does_it_work`: Explanation of how volunteering works for the event.
+- `trip_faq_19_trip_faq_title`: Title of FAQ item 19.
+- `trip_faq_19_trip_faq_answer`: Answer to FAQ item 19.
+- `trip_faq_20_trip_faq_title`: Title of FAQ item 20.
+- `trip_faq_20_trip_faq_answer`: Answer to FAQ item 20.
+- `event_how_does_this_work`: General explanation of how the event works.
+- `event_description`: Detailed description of the event.
+- `trip_faq_21_trip_faq_title`: Title of FAQ item 21.
+- `trip_faq_21_trip_faq_answer`: Answer to FAQ item 21.
+- `event_next_week`: Information about the next week's event.
+- `event_location_0_venue_name`: Name of the primary venue.
+- `event_location_0_venue_url`: URL of the primary venue.
+- `event_location_1_venue_name`: Name of the secondary venue (if applicable).
+- `event_location_1_venue_url`: URL of the secondary venue (if applicable).
+- `event_location_old`: Previous location information (if changed).
+- `event_type`: Type of event.
+- `overnight_plans`: Plans for overnight events.
+- `hut_photo`: Photo of the hut (for overnight events).
+- `hut_facilities_description`: Description of hut facilities.
+- `hut_name`: Name of the hut.
+- `hut_google_maps_location`: Google Maps location of the hut.
+- `trip_faq_11_trip_faq_title`: Title of FAQ item 11.
+- `trip_faq_11_trip_faq_answer`: Answer to FAQ item 11.
+- `trip_faq_12_trip_faq_title`: Title of FAQ item 12.
+- `trip_faq_12_trip_faq_answer`: Answer to FAQ item 12.
+- `event_paying_for`: What the event fee covers.
+- `event_start_time`: Start time of the event.
+- `session_start_time`: Start time of the session.
+- `session_end_time`: End time of the session.
+- `who_running_event`: Information about who is running the event.
+- `session_will_cover`: What the session will cover.
+- `event_start_date`: Start date of the event.
+- `event_finish_date`: Finish date of the event.
+- `event_possible_location`: Possible location for the event.
+- `event_location`: Confirmed location of the event.
+- `primary_category`: The primary category of the event.
+
+### Details
+- The view builds upon the `wp_events_db` view, joining with `wp_term_relationships`, `wp_term_taxonomy`, and `wp_terms` tables.
+- It includes more detailed event information and categorization.
+- This view is particularly useful for comprehensive event reporting and analysis.
+
+## 11. wp_clan_crags
+
+### Purpose
+This view consolidates information about climbing crags, including their details and associated metadata.
+
+### Columns
+- `crag_id`: The unique identifier for the crag.
+- `crag_name`: The name of the crag.
+- Various metadata fields related to the crag, such as location description, climbing types, region, guidebooks, photos, parking information, accessibility details, and weather forecast links.
+
+### Details
+- The view selects from the `wp_posts` and `wp_postmeta` tables.
+- It uses a series of MAX() functions with CASE statements to pivot the metadata into columns.
+- This view provides a comprehensive overview of each crag, making it easier to query and display crag information.

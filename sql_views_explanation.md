@@ -2,67 +2,68 @@
 
 This document provides a detailed explanation of the SQL views used by The Climbing Clan, including their purpose and the columns they provide.
 
-## 1. wp_orders_users_fakedb
+## 1. wp_clan_crags
 
 ### Purpose
-This view links order IDs with customer user IDs for shop orders in the WooCommerce system.
+This view consolidates information about climbing crags, including their details and associated metadata.
 
 ### Columns
-- `post_id`: The unique identifier for the shop order.
-- `meta_value`: The customer user ID associated with the order.
+- `crag_id`: The unique identifier for the crag.
+- `crag_name`: The name of the crag.
+- Various metadata fields related to the crag, such as location description, climbing types, region, guidebooks, photos, parking information, accessibility details, and weather forecast links.
 
 ### Details
-- The view selects from the `wp_postmeta` table.
-- It filters for entries where `meta_key = '_customer_user'`.
-- It only includes orders (posts) of type 'shop_order'.
-- This view helps to quickly retrieve customer information for each order.
+- The view selects from the `wp_posts` and `wp_postmeta` tables.
+- It uses a series of MAX() functions with CASE statements to pivot the metadata into columns.
+- This view provides a comprehensive overview of each crag, making it easier to query and display crag information.
 
-## 2. wp_wc_order_product_augmented
+## 2. wp_events_db
 
 ### Purpose
-This view provides detailed information about order items, including product details and customer information.
+This view aggregates information about climbing events, including product details and associated metadata.
 
 ### Columns
-- `order_item_id`: The unique identifier for the order item.
-- `order_id`: The ID of the order containing this item.
-- `product_id`: The ID of the product ordered.
-- `variation_id`: The ID of the product variation, if applicable.
-- `customer_id`: The ID of the customer who placed the order.
+- `product_id`: The unique identifier for the event product.
+- `product_name`: The name of the event product.
+- Various metadata fields related to the event, such as price, cost, total sales, stock information, event dates, and specific event details.
+
+### Details
+- The view selects from the `wp_posts` and `wp_postmeta` tables.
+- It uses MAX() functions with CASE statements to pivot the metadata into columns.
+- This view is useful for analyzing event data, including pricing, availability, and specific event characteristics.
+
+## 3. wp_vw_events_db
+
+### Purpose
+This view provides an extended version of the events database, including additional metadata and category information.
+
+### Columns
+- All columns from `wp_events_db`.
+- Additional metadata fields such as report details, event descriptions, FAQ information, and location details.
+- `primary_category`: The primary category of the event.
+
+### Details
+- The view builds upon the `wp_events_db` view, joining with `wp_term_relationships`, `wp_term_taxonomy`, and `wp_terms` tables.
+- It includes more detailed event information and categorization.
+- This view is particularly useful for comprehensive event reporting and analysis.
+
+## 4. wp_vw_order_details
+
+### Purpose
+This view combines order information with customer details for a comprehensive overview of each order.
+
+### Columns
+- `order_id`: The unique identifier for the order.
+- `first_name`: The customer's first name.
+- `last_name`: The customer's last name.
 - `order_item_name`: The name of the ordered item.
-- `_qty`: The quantity of the item ordered.
-- `ticket_info`: Additional ticket information stored as order item meta.
+- `order_created`: The date and time when the order was created.
 
 ### Details
-- The view joins the `wp_wc_order_product_lookup` table with the `wp_tickets_fakedb` view.
-- It uses a subquery to fetch additional ticket information from `wp_woocommerce_order_itemmeta`.
-- This view is useful for analyzing order data, including product details and quantities.
+- The view joins the `wp_order_product_customer_lookup` table with the `wp_member_db` view.
+- It provides a quick way to access essential order information along with customer details.
+- This view is useful for order management and customer service purposes.
 
-## 3. wp_tickets_fakedb
-
-### Purpose
-This view consolidates various pieces of information about order items, particularly focusing on ticket-related data.
-
-### Columns
-- `order_item_id`: The unique identifier for the order item.
-- `order_item_name`: The name of the ordered item.
-- `_product_id`: The ID of the product.
-- `_variation_id`: The ID of the product variation, if applicable.
-- `_qty`: The quantity ordered.
-- `_tax_class`: The tax class of the item.
-- `_line_subtotal`: The subtotal for the line item.
-- `_line_subtotal_tax`: The tax on the subtotal for the line item.
-- `_line_total`: The total for the line item.
-- `_line_tax`: The tax for the line item.
-- `_line_tax_data`: Additional tax data for the line item.
-- `_reduced_stock`: The amount of stock reduced by this order.
-- `do-you-lead-trad`: Custom field related to trad climbing leadership.
-- `trad-leader-or-clan-belayer`: Custom field specifying the role in trad climbing.
-
-### Details
-- The view selects from the `wp_woocommerce_order_items` table.
-- It uses multiple subqueries to fetch various pieces of metadata from `wp_woocommerce_order_itemmeta`.
-- This view is particularly useful for detailed analysis of order items, especially for ticket-based products.
-
-These views provide The Climbing Clan with efficient ways to access and analyze data related to orders, customers, products, and ticket information. They facilitate better management of the e-commerce system and enable more detailed reporting and analysis of sales and customer behavior.
+These views provide The Climbing Clan with efficient ways to access and analyze data related to crags, events, orders, and customer information. They facilitate better management of the climbing locations, event planning, and order processing, enabling more detailed reporting and analysis across various aspects of the organization's operations.
 
 By combining information from different tables and presenting it in a structured format, these views simplify complex queries and improve the overall performance of data retrieval operations for The Climbing Clan's platform.

@@ -346,6 +346,82 @@ This view provides valuable insights into member behavior and engagement, allowi
 
 The logic in this view emphasizes the importance of both attendance and volunteering, with penalties for unreliable behavior (no-shows, late cancellations) and bonuses for extra engagement (showing up without registration, consistent volunteering). This balanced approach helps maintain a fair and encouraging system for member participation in The Climbing Clan's activities.
 
+## 8. wp_member_db_scores
+
+### Purpose
+This view calculates various performance scores for each member based on their volunteering and attendance records. It provides a quantitative measure of a member's reliability, engagement, and overall contribution to The Climbing Clan's activities.
+
+### Columns
+- `user_id`: The unique identifier for each member.
+- `volunteer_reliability_score`: A percentage score indicating how reliable a member is in fulfilling their volunteering commitments.
+- `attendance_reliability_score`: A percentage score indicating how reliable a member is in attending events they've signed up for.
+- `volunteer_receptiveness`: A percentage score indicating how often a member volunteers when opportunities are available.
+- `volunteer_score`: Same as `volunteer_receptiveness`, possibly redundant.
+- `volunteer_value`: A weighted score that takes into account the number of times a member has volunteered and their reliability in doing so.
+- `volunteer_score_old`: An older version of the volunteer score calculation, kept for reference or comparison.
+- `attendance_score`: A comprehensive score that rewards attendance and penalizes various forms of non-attendance.
+
+### Details
+- The view uses data from the `wp_member_db` table, which likely contains aggregated statistics about each member's activities.
+- Scores are calculated using various formulas that weight different aspects of a member's participation:
+  * `volunteer_reliability_score` = (successful volunteering / total volunteering opportunities) * 100
+  * `attendance_reliability_score` = (attended events / (attended + late cancellations + no-shows)) * 100
+  * `volunteer_receptiveness` = (successful volunteering / total volunteer signups) * 100
+  * `volunteer_value` = A complex calculation that rewards consistent volunteering and penalizes missed volunteer opportunities
+  * `attendance_score` = 100 + bonuses for attendance - penalties for various types of non-attendance
+
+This view is crucial for The Climbing Clan's member management system, allowing administrators to:
+1. Identify and reward highly engaged and reliable members
+2. Spot members who might need encouragement or support to improve their participation
+3. Make data-driven decisions about member roles and responsibilities
+4. Track the overall health and engagement of the club's membership over time
+
+## 9. wp_member_db_stats
+
+### Purpose
+This view aggregates various statistics about each member's participation in The Climbing Clan's activities. It provides a comprehensive overview of a member's involvement in different types of events and their volunteering history.
+
+### Columns
+- `user_id`: The unique identifier for each member.
+- `volunteer_for_numerator`: Count of events where the member successfully volunteered and attended.
+- `volunteer_for_but_no_attend`: Count of events where the member volunteered but didn't attend.
+- `volunteer_for_but_no_volunteer`: Count of events where the member was supposed to volunteer but didn't.
+- `volunteer_for_and_cancel_but_did_volunteer`: Count of events where the member cancelled attendance but still volunteered.
+- `volunteer_for_denominator`: Total count of events the member signed up to volunteer for.
+- `attendance_attended`: Total count of events the member attended.
+- `attendance_outdoor_thursday_attended`: Count of outdoor Thursday events attended.
+- `attendance_outdoor_saturday_attended`: Count of outdoor Saturday events attended.
+- `attendance_outdoor_day_attended`: Count of outdoor day events attended.
+- `attendance_indoor_wednesday_attended`: Count of indoor Wednesday events attended.
+- `attendance_overnight_attended`: Count of overnight events attended.
+- `attendance_training_attended`: Count of training events attended.
+- Various specific training event attendance counts (e.g., indoor lead training, top rope training, etc.)
+- `attendance_first_aid_attended`: Count of first aid training events attended.
+- `attendance_social_attended`: Count of social events attended.
+- `attendance_signups`: Total count of event signups.
+- `attendance_cancelled`: Count of cancelled event attendances.
+- `attendance_noregistershow`: Count of events attended without registration.
+- `attendance_noshow`: Count of no-shows.
+- `attendance_weather_cancel`: Count of weather-related cancellations.
+- `attendance_clan_cancel`: Count of events cancelled by the clan.
+- `attendance_latebail`: Count of late cancellations.
+- `attendance_duplicate`: Count of duplicate signups.
+- `attendance_inprogress`: Count of in-progress event registrations.
+
+### Details
+- The view joins data from the `wp_member_db` and `wp_order_product_customer_lookup` tables.
+- It uses a series of COUNT and CASE statements to aggregate different types of event participation and volunteering activities.
+- The statistics are grouped by user_id, providing a comprehensive summary for each member.
+
+This view is essential for The Climbing Clan's membership management and event planning:
+1. It allows administrators to track individual member participation across various event types.
+2. Helps identify members who are particularly active in specific areas (e.g., outdoor events, training sessions).
+3. Provides insights into volunteering patterns and reliability.
+4. Assists in identifying potential issues (e.g., frequent no-shows or late cancellations).
+5. Supports data-driven decision making for event planning and member engagement strategies.
+
+Both the `wp_member_db_scores` and `wp_member_db_stats` views work together to provide a comprehensive system for evaluating and understanding member participation and engagement in The Climbing Clan. While the `stats` view provides raw data on participation, the `scores` view translates this data into meaningful metrics that can be used for member recognition, improvement strategies, and overall club management.
+
 ## 5. wp_order_product_customer_lookup
 
 ### Purpose

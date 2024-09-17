@@ -92,4 +92,4 @@ if (require.main === module) {
   main().catch(console.error);
 }
 
-module.exports = { main as pushViews };
+module.exports = { pushViews: main };

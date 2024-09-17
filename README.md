@@ -63,6 +63,14 @@ How it works:
      - Drops the existing view (if any).
      - Creates/updates the view with the new definition.
 
+Note: This script processes all views in a single operation. Atomic updates for individual views are not supported.
+
+## Limitations
+
+- Atomic Updates: The system does not support atomic updates for individual views. When running the push script, all views are processed in a single operation. If an error occurs during the process, some views may be updated while others are not, potentially leaving the database in an inconsistent state.
+- Rollback: There is no built-in rollback mechanism. In case of a failed update, manual intervention may be required to restore the previous state of the views.
+- Concurrency: The scripts do not implement any locking mechanism. Running multiple instances of the push script simultaneously may lead to unexpected results.
+
 ## Usage
 
 To pull views from the remote database:

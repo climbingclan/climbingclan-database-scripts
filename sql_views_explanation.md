@@ -236,14 +236,58 @@ This view consolidates member information from various user metadata fields, pro
 - `admin-social-instagram-handle`: User's Instagram handle.
 - `admin-uninsured-climbers-alert-1`: Alert for uninsured climbers (part 1).
 - `admin-no-personal-insurance-disclaimer`: User's acknowledgment of no personal insurance disclaimer.
-- Various `stats_*` fields: Cached statistics about the user's participation and volunteering.
-- Various `scores_*` fields: Cached scores for the user's participation and volunteering.
+- `stats_volunteer_for_numerator_cached`: Number of events volunteered for and attended.
+- `stats_volunteer_for_but_no_attend_cached`: Number of events volunteered for but not attended.
+- `stats_volunteer_for_denominator_cached`: Total number of events volunteered for.
+- `stats_attendance_attended_cached`: Number of events attended.
+- `stats_attendance_outdoor_thursday_attended_cached`: Number of outdoor Thursday events attended.
+- `stats_attendance_outdoor_day_attended_cached`: Number of outdoor day events attended.
+- `stats_attendance_outdoor_saturday_attended_cached`: Number of outdoor Saturday events attended.
+- `stats_attendance_indoor_wednesday_attended_cached`: Number of indoor Wednesday events attended.
+- `stats_attendance_overnight_attended_cached`: Number of overnight events attended.
+- `stats_attendance_training_attended_cached`: Number of training events attended.
+- `stats_attendance_social_attended_cached`: Number of social events attended.
+- `stats_attendance_signups_cached`: Total number of event signups.
+- `stats_attendance_cancelled_cached`: Number of cancelled event attendances.
+- `stats_attendance_noregistershow_cached`: Number of events attended without registration.
+- `stats_attendance_noshow_cached`: Number of no-shows.
+- `stats_attendance_latebail_cached`: Number of late cancellations.
+- `stats_attendance_duplicate_cached`: Number of duplicate event registrations.
+- `stats_attendance_inprogress_cached`: Number of in-progress event registrations.
+- `stats_volunteer_for_but_no_volunteer_cached`: Number of events volunteered for but did not volunteer.
+- `scores_volunteer_reliability_score_cached`: Cached volunteer reliability score.
+- `scores_attendance_reliability_score_cached`: Cached attendance reliability score.
+- `scores_volunteer_value_cached`: Cached volunteer value score.
+- `scores_attendance_score_cached`: Cached attendance score.
+- `scores_volunteer_score_cached`: Cached volunteer score.
+- `scores_and_stats_cache_last_updated`: Last update timestamp for scores and stats cache.
 - `cc_attendance_noted_date`: Date of the last noted attendance.
 - `cc_compliance_last_date_of_climbing`: Last date the user went climbing (for compliance tracking).
 - `milestones_3_badge`: Information about the user's 3-event milestone badge.
+- `milestones_3_badge_marked_given_at`: Timestamp when the 3-event milestone badge was marked as given.
+- `milestones_3_badge_marked_given_by`: User who marked the 3-event milestone badge as given.
 - `milestones_5_band`: Information about the user's 5-event milestone band.
+- `milestones_5_band_marked_given_at`: Timestamp when the 5-event milestone band was marked as given.
+- `milestones_5_band_marked_given_by`: User who marked the 5-event milestone band as given.
 - `cc_compliance_first_date_of_climbing`: First date the user went climbing (for compliance tracking).
-- Various `competency_*` fields: User's competencies in different areas of climbing and event organization.
+- `competency_indoor_trip_director`: User's competency as an indoor trip director.
+- `competency_indoor_checkin`: User's competency for indoor check-in.
+- `competency_indoor_pairing`: User's competency for indoor pairing.
+- `competency_indoor_floorwalker`: User's competency as an indoor floorwalker.
+- `competency_indoor_skillsharer`: User's competency as an indoor skill sharer.
+- `competency_indoor_announcements`: User's competency for indoor announcements.
+- `competency_outdoor_trip_director`: User's competency as an outdoor trip director.
+- `competency_outdoor_group_maker`: User's competency as an outdoor group maker.
+- `competency_outdoor_message_maker`: User's competency as an outdoor message maker.
+- `competency_outdoor_crag_coordinator`: User's competency as an outdoor crag coordinator.
+- `competency_overnight_trip_director`: User's competency as an overnight trip director.
+- `competency_overnight_evening_meal`: User's competency for overnight evening meals.
+- `competency_overnight_climbing_coordinator`: User's competency as an overnight climbing coordinator.
+- `competency_overnight_lift_coordinator`: User's competency as an overnight lift coordinator.
+- `competency_overnight_breakfast_lunch`: User's competency for overnight breakfast and lunch.
+- `competency_training_training_organiser`: User's competency as a training organizer.
+- `competency_outdoor_skillsharer`: User's competency as an outdoor skill sharer.
+- `competency_social_social_organiser`: User's competency as a social event organizer.
 - `admin_new_indoor_clan_join_admin_team`: Indicates if the user has joined the new indoor clan admin team.
 - `admin_parthian_clan_join_admin_team`: Indicates if the user has joined the Parthian clan admin team.
 - `climbing_outdoor_leaving_postcode`: Postcode from which the user leaves for outdoor climbing.

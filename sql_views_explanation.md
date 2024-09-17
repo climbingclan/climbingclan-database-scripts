@@ -25,7 +25,19 @@ This view aggregates information about climbing events, including product detail
 ### Columns
 - `product_id`: The unique identifier for the event product.
 - `product_name`: The name of the event product.
-- Various metadata fields related to the event, such as price, cost, total sales, stock information, event dates, and specific event details.
+- `price`: The price of the event.
+- `cost`: The cost associated with the event.
+- `total_sales`: Total sales for the event.
+- `stock`: Current stock level.
+- `stock_status`: Status of the stock (e.g., in stock, out of stock).
+- `sku`: Stock Keeping Unit for the event.
+- `wooct_time_end`: End time for the event.
+- `woocommerce_waitlist`: Waitlist information.
+- `event_total_places_available`: Total number of places available for the event.
+- `event_signup_opens`: Date and time when sign-up opens.
+- `event_start_date_time`: Start date and time of the event.
+- `event_for_u18s`: Indicates if the event is suitable for under 18s.
+- `event_dogs_come`: Indicates if dogs are allowed at the event.
 
 ### Details
 - The view selects from the `wp_posts` and `wp_postmeta` tables.
@@ -38,8 +50,53 @@ This view aggregates information about climbing events, including product detail
 This view provides an extended version of the events database, including additional metadata and category information.
 
 ### Columns
-- All columns from `wp_events_db`.
-- Additional metadata fields such as report details, event descriptions, FAQ information, and location details.
+- All columns from `wp_events_db` (as listed above).
+- `report_details_0_report_author`: Author of the event report.
+- `report_details_0_report_location`: Location mentioned in the event report.
+- `report_details_0_report_content`: Content of the event report.
+- `report_details_0_report_photos`: Photos associated with the event report.
+- `report_details`: Full report details.
+- `short_description`: Brief description of the event.
+- `membership_required`: Indicates if membership is required for participation.
+- `event_how_it_works`: Explanation of how the event works.
+- `event_how_we_get_these`: Information on how these events are organized.
+- `event_when_do_we_meet`: Meeting time information.
+- `event_how_difficult_will_it_be`: Difficulty level of the event.
+- `event_volunteering_how_does_it_work`: Explanation of how volunteering works for the event.
+- `trip_faq_19_trip_faq_title`: Title of FAQ item 19.
+- `trip_faq_19_trip_faq_answer`: Answer to FAQ item 19.
+- `trip_faq_20_trip_faq_title`: Title of FAQ item 20.
+- `trip_faq_20_trip_faq_answer`: Answer to FAQ item 20.
+- `event_how_does_this_work`: General explanation of how the event works.
+- `event_description`: Detailed description of the event.
+- `trip_faq_21_trip_faq_title`: Title of FAQ item 21.
+- `trip_faq_21_trip_faq_answer`: Answer to FAQ item 21.
+- `event_next_week`: Information about the next week's event.
+- `event_location_0_venue_name`: Name of the primary venue.
+- `event_location_0_venue_url`: URL of the primary venue.
+- `event_location_1_venue_name`: Name of the secondary venue (if applicable).
+- `event_location_1_venue_url`: URL of the secondary venue (if applicable).
+- `event_location_old`: Previous location information (if changed).
+- `event_type`: Type of event.
+- `overnight_plans`: Plans for overnight events.
+- `hut_photo`: Photo of the hut (for overnight events).
+- `hut_facilities_description`: Description of hut facilities.
+- `hut_name`: Name of the hut.
+- `hut_google_maps_location`: Google Maps location of the hut.
+- `trip_faq_11_trip_faq_title`: Title of FAQ item 11.
+- `trip_faq_11_trip_faq_answer`: Answer to FAQ item 11.
+- `trip_faq_12_trip_faq_title`: Title of FAQ item 12.
+- `trip_faq_12_trip_faq_answer`: Answer to FAQ item 12.
+- `event_paying_for`: What the event fee covers.
+- `event_start_time`: Start time of the event.
+- `session_start_time`: Start time of the session.
+- `session_end_time`: End time of the session.
+- `who_running_event`: Information about who is running the event.
+- `session_will_cover`: What the session will cover.
+- `event_start_date`: Start date of the event.
+- `event_finish_date`: Finish date of the event.
+- `event_possible_location`: Possible location for the event.
+- `event_location`: Confirmed location of the event.
 - `primary_category`: The primary category of the event.
 
 ### Details

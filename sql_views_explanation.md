@@ -422,7 +422,7 @@ This view is essential for The Climbing Clan's membership management and event p
 
 Both the `wp_member_db_scores` and `wp_member_db_stats` views work together to provide a comprehensive system for evaluating and understanding member participation and engagement in The Climbing Clan. While the `stats` view provides raw data on participation, the `scores` view translates this data into meaningful metrics that can be used for member recognition, improvement strategies, and overall club management.
 
-## 5. wp_order_product_customer_lookup
+## 10. wp_order_product_customer_lookup
 
 ### Purpose
 This view combines order, product, and customer information to provide a comprehensive overview of each order, including attendance and volunteering details.

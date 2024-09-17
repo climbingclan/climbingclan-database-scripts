@@ -124,3 +124,55 @@ This view combines order information with customer details for a comprehensive o
 These views provide The Climbing Clan with efficient ways to access and analyze data related to crags, events, orders, and customer information. They facilitate better management of the climbing locations, event planning, and order processing, enabling more detailed reporting and analysis across various aspects of the organization's operations.
 
 By combining information from different tables and presenting it in a structured format, these views simplify complex queries and improve the overall performance of data retrieval operations for The Climbing Clan's platform.
+
+## 5. wp_order_product_customer_lookup
+
+### Purpose
+This view combines order, product, and customer information to provide a comprehensive overview of each order, including attendance and volunteering details.
+
+### Columns
+- `order_id`: The unique identifier for the order.
+- `product_id`: The ID of the product ordered.
+- `variation_id`: The ID of the product variation, if applicable.
+- `order_item_name`: The name of the ordered item.
+- `status`: The current status of the order.
+- `cc_attendance`: The attendance status for the event.
+- `cc_volunteer_attendance`: The attendance status for volunteers.
+- `cc_volunteer`: The volunteering role or status.
+- `cc_outdoor_location`: The outdoor location for the event, if applicable.
+- `cc_location`: The general location of the event.
+- `cc_indoor_location`: The indoor location for the event, if applicable.
+- `memberbot_order_category`: The category of the order as determined by the memberbot.
+- `customer_id`: The unique identifier for the customer.
+- `user_id`: The user ID associated with the order.
+- `order_created`: The date and time when the order was created.
+- `cc_attendance_sim`: Simulated attendance status (for testing or forecasting).
+- `cc_volunteer_attendance_sim`: Simulated volunteer attendance status.
+- `cc_volunteer_sim`: Simulated volunteering role or status.
+- `cc_outdoor_location_sim`: Simulated outdoor location.
+- `first_name`: The first name of the customer (placeholder in this view).
+- `last_name`: The last name of the customer (placeholder in this view).
+
+### Details
+- This view joins data from multiple tables including `wp_wc_order_stats`, `wp_wc_order_product_lookup`, `wp_woocommerce_order_items`, and `wp_postmeta`.
+- It provides a comprehensive overview of each order, including product details, customer information, and event-specific data.
+- The view is particularly useful for analyzing attendance patterns, volunteer participation, and event logistics.
+
+## 6. wp_vw_order_details
+
+### Purpose
+This view provides a simplified version of order details, focusing on essential information about the order and the customer.
+
+### Columns
+- `order_id`: The unique identifier for the order.
+- `first_name`: The first name of the customer.
+- `last_name`: The last name of the customer.
+- `order_item_name`: The name of the ordered item.
+- `order_created`: The date and time when the order was created.
+
+### Details
+- This view joins the `wp_order_product_customer_lookup` view with the `wp_member_db` view.
+- It offers a streamlined view of order information, making it easier to quickly access key details about orders and customers.
+- This view is particularly useful for customer service purposes, order management, and basic reporting on event participation.
+
+These additional views enhance The Climbing Clan's ability to manage orders, track event participation, and analyze customer engagement. They provide crucial links between order data, customer information, and event details, enabling more efficient operations and deeper insights into member activities and preferences.

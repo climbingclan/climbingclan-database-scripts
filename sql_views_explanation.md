@@ -32,14 +32,14 @@ These views work together to provide a comprehensive system for managing members
 
 1. [wp_member_db](#1-wp_member_db)
 2. [wp_order_product_customer_lookup](#2-wp_order_product_customer_lookup)
-4. [wp_member_db_skills](#4-wp_member_db_skills)
-5. [wp_member_db_skillshare](#5-wp_member_db_skillshare)
-6. [wp_member_db_gear](#6-wp_member_db_gear)
-7. [wp_member_db_stats](#7-wp_member_db_stats)
-8. [wp_member_db_scores](#8-wp_member_db_scores)
-9. [wp_events_db](#9-wp_events_db)
-10. [wp_vw_events_db](#10-wp_vw_events_db)
-11. [wp_clan_crags](#11-wp_clan_crags)
+3. [wp_member_db_skills](#3-wp_member_db_skills)
+4. [wp_member_db_skillshare](#4-wp_member_db_skillshare)
+5. [wp_member_db_gear](#5-wp_member_db_gear)
+6. [wp_member_db_stats](#6-wp_member_db_stats)
+7. [wp_member_db_scores](#7-wp_member_db_scores)
+8. [wp_events_db](#8-wp_events_db)
+9. [wp_vw_events_db](#9-wp_vw_events_db)
+10. [wp_clan_crags](#10-wp_clan_crags)
 
 ## 1. wp_member_db
 
@@ -252,7 +252,7 @@ This view combines order, product, and customer information to provide a compreh
 - It provides a comprehensive overview of each order, including product details, customer information, and event-specific data.
 - The view is particularly useful for analyzing attendance patterns, volunteer participation, and event logistics.
 
-## 4. wp_member_db_skills
+## 3. wp_member_db_skills
 
 ### Purpose
 This view provides a detailed breakdown of each member's climbing skills across various disciplines, including belaying, traditional (trad) climbing, and sport climbing. It transforms the text-based skill descriptions from the `wp_member_db` table into boolean (Yes/No) flags for easy querying and analysis.
@@ -294,7 +294,7 @@ This view provides a detailed breakdown of each member's climbing skills across 
 - The view covers a wide range of climbing skills across different disciplines (traditional, sport, indoor, outdoor) and techniques (belaying, leading, seconding, etc.).
 - This comprehensive skill breakdown is invaluable for pairing members, planning events, ensuring safety, and tracking member progression.
 
-## 5. wp_member_db_skillshare
+## 4. wp_member_db_skillshare
 
 ### Purpose
 This view provides a detailed breakdown of the climbing skills that members are willing and able to share or teach to others. It covers indoor climbing, traditional (trad) climbing, and sport climbing skills.
@@ -346,7 +346,7 @@ Sport Climbing Skills:
   3. Pairing less experienced members with those who can teach them new skills.
   4. Planning training events based on the available skill-sharing resources within the club.
 
-## 6. wp_member_db_gear
+## 5. wp_member_db_gear
 
 ### Purpose
 This view provides a detailed breakdown of the gear that members bring to different types of climbing events. It helps organizers and other members understand what equipment is available for various activities.
@@ -372,7 +372,7 @@ This view provides a detailed breakdown of the gear that members bring to differ
 - The view is particularly useful for event planning, ensuring that necessary equipment is available for different types of climbing activities.
 - It can help identify members who consistently bring certain types of gear, which can be useful for pairing members or assigning roles during events.
 
-## 7. wp_member_db_stats
+## 6. wp_member_db_stats
 
 ### Purpose
 This view aggregates various statistics about each member's participation in The Climbing Clan's activities. It provides a comprehensive overview of a member's involvement in different types of events and their volunteering history.
@@ -416,7 +416,7 @@ This view is essential for The Climbing Clan's membership management and event p
 4. Assists in identifying potential issues (e.g., frequent no-shows or late cancellations).
 5. Supports data-driven decision making for event planning and member engagement strategies.
 
-## 8. wp_member_db_scores
+## 7. wp_member_db_scores
 
 ### Purpose
 This view calculates various performance scores for each member based on their volunteering and attendance records. It provides a quantitative measure of a member's reliability, engagement, and overall contribution to The Climbing Clan's activities.
@@ -446,7 +446,7 @@ This view is crucial for The Climbing Clan's member management system, allowing 
 3. Make data-driven decisions about member roles and responsibilities
 4. Track the overall health and engagement of the club's membership over time
 
-## 9. wp_events_db
+## 8. wp_events_db
 
 ### Purpose
 This view aggregates information about climbing events, including product details and associated metadata.
@@ -473,7 +473,7 @@ This view aggregates information about climbing events, including product detail
 - It uses MAX() functions with CASE statements to pivot the metadata into columns.
 - This view is useful for analyzing event data, including pricing, availability, and specific event characteristics.
 
-## 10. wp_vw_events_db
+## 9. wp_vw_events_db
 
 ### Purpose
 This view provides an extended version of the events database, including additional metadata and category information.
@@ -533,7 +533,7 @@ This view provides an extended version of the events database, including additio
 - It includes more detailed event information and categorization.
 - This view is particularly useful for comprehensive event reporting and analysis.
 
-## 11. wp_clan_crags
+## 10. wp_clan_crags
 
 ### Purpose
 This view consolidates information about climbing crags, including their details and associated metadata.

@@ -1,20 +1,20 @@
 # SQL Views Explanation for The Climbing Clan
 
-**IMPORTANT: All views described in this document are READ-ONLY. Do not attempt to modify these views directly.**
+**IMPORTANT: All views described in this document are READ-ONLY. Do not attempt to modify these views directly with update statements - instead use the WordPress REST API.**
 
 This document provides a detailed explanation of the SQL views used by The Climbing Clan, including their purpose and the columns they provide. The views are organized into several categories, each serving a specific purpose in managing the club's data:
 
 1. Member Database Views:
-   - wp_member_db: Comprehensive member information
-   - wp_member_db_gear: Equipment details for each member
-   - wp_member_db_climbing: Detailed climbing skills for each member
+   - wp_member_db: Comprehensive member information including cached stats and scores.
 
 2. Order Database Views:
    - wp_order_product_customer_lookup: Combines order, product, and customer information
 
-3. Member "Yes/No" Views:
+3. Member "Yes/No" Views - derived from checkbox options in wp_member_db
+   - wp_member_db_climbing: Detailed climbing skills for each member
    - wp_member_db_skills: Boolean flags for various climbing skills
    - wp_member_db_skillshare: Skills members are willing to teach others
+   - wp_member_db_gear: Equipment details for each member
 
 4. Stats and Scores Views:
    - wp_member_db_stats: Aggregated statistics on member participation

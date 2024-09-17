@@ -33,40 +33,6 @@ This project provides a set of Node.js scripts to manage MySQL views for a WordP
    npm install
    ```
 
-## Configuration
-
-The project uses a `config.js` file to manage connection details. Here's how to configure it:
-
-1. Open `config.js` in your preferred text editor.
-
-2. Update the SSH configuration:
-   ```javascript
-   const sshConfig = {
-     host: 'your-ssh-host.com',
-     username: 'your-ssh-username',
-     agent: process.env.SSH_AUTH_SOCK,
-     compression: true,
-     serverAliveInterval: 60,
-     forwardX11: true
-   };
-   ```
-
-3. Update the database configuration:
-   ```javascript
-   db: {
-     host: 'localhost', // Usually 'localhost' for SSH tunneling
-     user: 'your-db-username',
-     database: 'your-database-name'
-   }
-   ```
-
-4. The `getDbPassword()` function retrieves the database password from the remote server. Ensure the path in this function matches your server's configuration:
-   ```javascript
-   conn.exec('cat ~/path/to/your/password/file', (err, stream) => {
-     // ...
-   });
-   ```
-
 ## Scripts
 
 ### Pull Views
@@ -127,10 +93,37 @@ node scripts/pushViews.js
 
 For any other issues, please check the console output for error messages and stack traces.
 
-## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+## Configuration
 
-This project is licensed under the MIT License.
+The project uses a `config.js` file to manage connection details. Here's how to configure it:
+
+1. Open `config.js` in your preferred text editor.
+
+2. Update the SSH configuration:
+   ```javascript
+   const sshConfig = {
+     host: 'your-ssh-host.com',
+     username: 'your-ssh-username',
+     agent: process.env.SSH_AUTH_SOCK,
+     compression: true,
+     serverAliveInterval: 60,
+   };
+   ```
+
+3. Update the database configuration:
+   ```javascript
+   db: {
+     host: 'localhost', // Usually 'localhost' for SSH tunneling
+     user: 'your-db-username',
+     database: 'your-database-name'
+   }
+   ```
+
+4. The `getDbPassword()` function retrieves the database password from the remote server. Ensure the path in this function matches your server's configuration:
+   ```javascript
+   conn.exec('cat ~/path/to/your/password/file', (err, stream) => {
+     // ...
+   });
+   ```

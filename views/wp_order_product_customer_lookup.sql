@@ -83,7 +83,15 @@ select
       1
   ) AS `memberbot_order_category`,
   `a`.`customer_id` AS `customer_id`,
-  `a`.`customer_id` AS `user_id`,
+  (
+    select distinct
+      `t`.`meta_value` AS `_customer_user`
+    from
+      `wp_postmeta` `t`
+    where
+      `t`.`post_id` = `a`.`order_id`
+      and `t`.`meta_key` = '_customer_user'
+  ) AS `user_id`,
   `a`.`date_created` AS `order_created`,
   (
     select distinct

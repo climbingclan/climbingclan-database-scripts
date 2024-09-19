@@ -136,9 +136,7 @@ select
       and `wp_postmeta`.`meta_key` = 'cc_outdoor_location_sim'
     limit
       1
-  ) AS `cc_outdoor_location_sim`,
-  '' AS `first_name`,
-  '' AS `last_name`
+  ) AS `cc_outdoor_location_sim`
 from
   (
     (
